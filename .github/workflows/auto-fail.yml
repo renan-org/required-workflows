@@ -1,0 +1,14 @@
+name: 00-Testing Required Workflows
+
+run-name: "Auto-fail - via ${{ github.event_name }}"
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  auto-fail:
+    runs-on: ub
+    steps:
+      - name: Echo
+        run: echo "Test" 
