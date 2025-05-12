@@ -4,6 +4,8 @@ on:
   push:
   pull_requests:
 
+run-name: Check build WF in Org
+
 jobs:
   check-workflows:
     strategy:
