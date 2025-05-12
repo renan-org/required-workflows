@@ -12,5 +12,5 @@ jobs:
     strategy:
       fail-fast: true
     steps:
-      - name: Echo
-        run: echo "Test" 
+      - name: Checkout
+        uses: actions/checkout@v4
