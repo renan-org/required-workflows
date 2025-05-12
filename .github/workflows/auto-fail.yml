@@ -8,7 +8,7 @@ on:
 
 jobs:
   auto-fail:
-    runs-on: ub
+    runs-on: ubuntu-latest
     steps:
       - name: Echo
         run: echo "Test" 
