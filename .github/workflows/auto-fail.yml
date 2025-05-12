@@ -9,6 +9,8 @@ on:
 jobs:
   auto-fail:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
     steps:
       - name: Echo
         run: echo "Test" 
