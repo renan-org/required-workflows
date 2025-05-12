@@ -1,16 +1,9 @@
-name: 00-Testing Required Workflows
-
-run-name: "Auto-fail - via ${{ github.event_name }}"
-
-on:
-  workflow_dispatch:
-  push:
+name: Org-Wide Workflow
+on: [push, pull_request]
 
 jobs:
-  auto-fail:
+  enforce-policy:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: true
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Run org-wide checks
+        run: echo "Running organization-wide policies..."
