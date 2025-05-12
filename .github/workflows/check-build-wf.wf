@@ -1,0 +1,35 @@
+name: Check Org build WF 
+
+on:
+  push:
+  pull_requests:
+
+jobs:
+  check-workflows:
+    strategy:
+      fail-fast: true 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch organization repositories
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -H "Authorization: token $GITHUB_TOKEN" \
+            https://api.github.com/orgs/YOUR_ORG/repos > repos.json
+
+      - name: Check workflows
+        run: |
+          for repo in $(jq -r '.[].name' repos.json); do
+            RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" \
+              https://api.github.com/repos/YOUR_ORG/$repo/actions/workflows)
+            if ! echo "$RESPONSE" | grep -q "build.yml"; then
+              echo "$repo is missing the build workflow!"
+              # Notify or open a PR (next step)
+            fi
+          done
+  
+      - name: Create Issue
+        run: |
+          curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
+          -d '{"title": "Missing build workflow", "body": "Please add build.yml to this repo."}' \
+          https://api.github.com/repos/YOUR_ORG/REPO_NAME/issues
