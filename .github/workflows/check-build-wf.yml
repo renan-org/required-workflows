@@ -2,7 +2,7 @@ name: Check Org build WF
 
 on:
   push:
-  pull_requests:
+  pull_request:
 
 run-name: Check build WF in Org
 
