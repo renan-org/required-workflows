@@ -16,6 +16,6 @@ jobs:
   test-reusable:
     # Call the reusable workflow using remote reference (for remote testing)
     ## Locally ./.github/workflows/dummy-reusable.yml
-    uses: renan-org/repo-sample/.github/workflows/dummy-reusable.yml@d37b71a
+    uses: renan-org/repo-sample/.github/workflows/dummy-reusable.yml@master
     with:
       input-message: ${{ inputs.test-message }}
